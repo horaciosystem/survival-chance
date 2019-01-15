@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Provider as ThemeProvider } from "reakit"
-import theme from "reakit-theme-default"
 import { StoreProvider } from "./common/StoreContext"
 import SurvivorsList from "./pages/SurvivorsList"
 import SurvivorDetails from "./pages/SurvivorDetails"
+import theme from "./theme"
+import "./theme/global"
 
 class App extends Component {
   render() {

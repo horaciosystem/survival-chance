@@ -57,7 +57,7 @@ injectGlobal`
   }
 
   body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     font-size: 2rem;
     line-height: 1;
     -webkit-font-smoothing: antialiased;

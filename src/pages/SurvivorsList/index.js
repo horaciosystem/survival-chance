@@ -1,8 +1,9 @@
 import React from "react"
-import { Link as ReactRouterLink } from "react-router-dom"
-import { Flex, List, Box, Link } from "reakit"
+import { Grid, Toolbar, Link, Heading } from "reakit"
 import useFetch from "../../lib/useFetch"
 import AsyncHandler from "../../common/AsyncHandler"
+import MainColumn from "../../common/MainColumn"
+import SurvivorCard from "./SurvivorCard"
 
 function SurvivorsList() {
   const movies = useFetch(
@@ -10,32 +11,36 @@ function SurvivorsList() {
   )
 
   return (
-    <AsyncHandler fetcher={movies}>
-      {({ data }) => (
-        <List>
-          {data.map(it => {
-            let id = extractId(it.location)
-
-            return (
-              <Box key={id} as="li">
-                <Flex justifyContent="space-between">
-                  {it.name}
-                  <ReactRouterLink to={`/survivor/${id}/details`}>
-                    Edit
-                  </ReactRouterLink>
-                </Flex>
-              </Box>
-            )
-          })}
-        </List>
-      )}
-    </AsyncHandler>
+    <MainColumn>
+      <Toolbar height="60px" padding="16px 0" marginBottom="24px">
+        <Toolbar.Content align="start">
+          <Heading fontSize={36} margin={0}>
+            Survivors
+          </Heading>
+        </Toolbar.Content>
+        <Toolbar.Content align="end">
+          <Toolbar.Focusable fontSize={20} as={Link}>
+            Add
+          </Toolbar.Focusable>
+        </Toolbar.Content>
+      </Toolbar>
+      <AsyncHandler fetcher={movies}>
+        {({ data }) => (
+          <Grid
+            columns="repeat( auto-fit, minmax(400px, 1fr) )"
+            autoRows="auto"
+            gap="10px"
+          >
+            {data.map(survivor => {
+              return (
+                <SurvivorCard key={survivor.location} survivor={survivor} />
+              )
+            })}
+          </Grid>
+        )}
+      </AsyncHandler>
+    </MainColumn>
   )
-}
-
-function extractId(url) {
-  let array = url.split("/")
-  return array.pop()
 }
 
 export default SurvivorsList
