@@ -1,5 +1,6 @@
 import React from "react"
-import { Grid, Toolbar, Link, Heading } from "reakit"
+import { Grid, Toolbar, Heading } from "reakit"
+import { Link as ReactRouterLink } from "react-router-dom"
 import useFetch from "../../lib/useFetch"
 import AsyncHandler from "../../common/AsyncHandler"
 import MainColumn from "../../common/MainColumn"
@@ -19,8 +20,12 @@ function SurvivorsList() {
           </Heading>
         </Toolbar.Content>
         <Toolbar.Content align="end">
-          <Toolbar.Focusable fontSize={20} as={Link}>
-            Add
+          <Toolbar.Focusable
+            fontSize={20}
+            as={ReactRouterLink}
+            to="/survivors/new"
+          >
+            New
           </Toolbar.Focusable>
         </Toolbar.Content>
       </Toolbar>

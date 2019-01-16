@@ -30,7 +30,7 @@ function SurvivorCard({ survivor: { name, age, location, gender } }) {
           <Box fontWeight={700}>{gender}</Box>
         </Flex>
       </Flex>
-      <ReactRouterLink to={`/survivor/${id}/details`}>Edit</ReactRouterLink>
+      <ReactRouterLink to={`/survivors/${id}/details`}>Edit</ReactRouterLink>
     </StyledCard>
   )
 }
