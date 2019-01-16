@@ -9,9 +9,7 @@ const theme = {
     text: "#2C2C2C",
     text75: "#616161",
     text50: "#959595",
-    text25: "#CACACA",
-    neutral: "#F4F5EF",
-    lightGreen: "#B8E986"
+    text25: "#CACACA"
   },
   pageWidth: "1200px",
   spacing: "1.6rem"

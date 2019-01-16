@@ -16,7 +16,7 @@ class App extends Component {
           <Router>
             <>
               <Route path="/survivors" exact component={SurvivorsList} />
-              <Route path="/survivors/new" exact component={SurvivorNew} />
+              <Route path="/survivors/new" component={SurvivorNew} />
               <Route
                 path="/survivors/:id/details"
                 component={SurvivorDetails}
