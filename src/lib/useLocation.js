@@ -17,9 +17,9 @@ function useLocation() {
     // TODO The geolocation API is not working in Google Chrome latest versions.
     navigator.geolocation.getCurrentPosition(
       position => {
-        var latitude = position.coords.latitude
-        var longitude = position.coords.longitude
-        setLocation({ latitude, longitude })
+        var lat = position.coords.latitude
+        var long = position.coords.longitude
+        setLocation({ lat, long })
         setLoading(false)
       },
       error => {

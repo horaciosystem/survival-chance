@@ -1,9 +1,9 @@
 import React from "react"
 import { Form, Field } from "react-final-form"
 import { styled, Box, Label, Input, Button } from "reakit"
-import Map from "../../../common/Map"
 import ItemsInput from "./ItemsInput"
 import ErrorLabel from "./ErrorLabel"
+import LocationInput from "./LocationInput"
 
 const StyledInput = styled(Input)`
   border-color: #dbdbdb;
@@ -66,8 +66,8 @@ function SurvivorForm({ onSubmit }) {
           <Field name="lonlat">
             {({ input, meta }) => (
               <Box marginBottom={16}>
-                <Label>Last location</Label>
-                <Map />
+                <Label>Last location: {input.value}</Label>
+                <LocationInput onChange={input.onChange} />
               </Box>
             )}
           </Field>

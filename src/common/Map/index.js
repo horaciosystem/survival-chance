@@ -1,58 +1,70 @@
-import React, { Component, createRef } from "react"
-import { Map, TileLayer, Marker, Popup } from "react-leaflet"
+import React, { createRef, useEffect, useState } from "react"
+import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet"
 
-export default class DraggableExample extends Component {
-  state = {
-    center: {
-      lat: 51.505,
-      lng: -0.09
-    },
-    marker: {
-      lat: 51.505,
-      lng: -0.09
-    },
+export default function Map({
+  initialLatitude,
+  initialLongitude,
+  handleMarkPosition
+}) {
+  let markerRef = createRef()
+
+  let [mapCenter] = useState({
+    lat: initialLatitude,
+    lng: initialLongitude
+  })
+
+  let [markerPosition, setMarkPosition] = useState({
+    lat: initialLatitude,
+    lng: initialLongitude
+  })
+
+  let [state, setState] = useState({
     zoom: 13,
     draggable: true
-  }
-  // $FlowFixMe: ref
-  refmarker = createRef()
+  })
 
-  toggleDraggable = () => {
-    this.setState({ draggable: !this.state.draggable })
+  useEffect(() => {
+    handleMarkPosition({ lat: initialLatitude, long: initialLongitude })
+  }, [])
+
+  function toggleDraggable() {
+    setState({ draggable: !state.draggable })
   }
 
-  updatePosition = () => {
-    const marker = this.refmarker.current
+  function updatePosition() {
+    const marker = markerRef.current
     if (marker != null) {
-      this.setState({
-        marker: marker.leafletElement.getLatLng()
+      let markerPosition = marker.leafletElement.getLatLng()
+      setMarkPosition(markerPosition)
+
+      handleMarkPosition({
+        lat: markerPosition.lat,
+        long: markerPosition.lng
       })
     }
   }
 
-  render() {
-    const position = [this.state.center.lat, this.state.center.lng]
-    const markerPosition = [this.state.marker.lat, this.state.marker.lng]
+  const position = [mapCenter.lat, mapCenter.lng]
+  const marker = [markerPosition.lat, markerPosition.lng]
 
-    return (
-      <Map center={position} zoom={this.state.zoom} style={{ height: "400px" }}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker
-          draggable={this.state.draggable}
-          onDragend={this.updatePosition}
-          position={markerPosition}
-          ref={this.refmarker}
-        >
-          <Popup minWidth={90}>
-            <span onClick={this.toggleDraggable}>
-              {this.state.draggable ? "DRAG MARKER" : "MARKER FIXED"}
-            </span>
-          </Popup>
-        </Marker>
-      </Map>
-    )
-  }
+  return (
+    <LeafletMap center={position} zoom={state.zoom} style={{ height: "400px" }}>
+      <TileLayer
+        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker
+        draggable={state.draggable}
+        onDragend={updatePosition}
+        position={marker}
+        ref={markerRef}
+      >
+        <Popup minWidth={90}>
+          <span onClick={toggleDraggable}>
+            {state.draggable ? "DRAG MARKER" : "MARKER FIXED"}
+          </span>
+        </Popup>
+      </Marker>
+    </LeafletMap>
+  )
 }

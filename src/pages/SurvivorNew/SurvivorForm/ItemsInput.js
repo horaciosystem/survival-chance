@@ -32,7 +32,7 @@ function ItemsInput({ onChange, value }) {
                   name={it}
                   type="number"
                   onChange={persistValue}
-                  min="1"
+                  min="0"
                   defaultValue={0}
                 />
               </td>

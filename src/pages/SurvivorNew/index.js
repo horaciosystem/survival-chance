@@ -9,12 +9,12 @@ function SurvivorNew() {
   let [id, setId] = useState(null)
 
   function onSubmit(body) {
-    return fetch("http://zssn-backend-example.herokuapp.com/api/people.json", {
+    return fetch("//zssn-backend-example.herokuapp.com/api/people.json", {
       method: "POST",
       body
     })
       .then(async response => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           let survivor = await response.json()
           setId(survivor.id)
           return undefined

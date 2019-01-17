@@ -8,7 +8,7 @@ import SurvivorCard from "./SurvivorCard"
 
 function SurvivorsList() {
   const movies = useFetch(
-    "http://zssn-backend-example.herokuapp.com/api/people.json"
+    "//zssn-backend-example.herokuapp.com/api/people.json"
   )
 
   return (
