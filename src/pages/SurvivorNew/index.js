@@ -14,12 +14,13 @@ function SurvivorNew() {
       body
     })
       .then(async response => {
-        if (response.status !== 200) {
-          return response.json()
+        if (response.status === 200) {
+          let survivor = await response.json()
+          setId(survivor.id)
+          return undefined
         }
-        let survivor = await response.json()
-        setId(survivor.id)
-        return undefined
+
+        return response.json()
       })
       .catch(() => {
         return { [FORM_ERROR]: "Creation failed!" }

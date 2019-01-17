@@ -9,10 +9,16 @@ const theme = {
     text: "#2C2C2C",
     text75: "#616161",
     text50: "#959595",
-    text25: "#CACACA"
+    text25: "#CACACA",
+    error: "#d32f2f"
   },
   pageWidth: "1200px",
-  spacing: "1.6rem"
+  spacing: "1.6rem",
+  fontWeight: {
+    regular: 400,
+    semibold: 600,
+    bold: 700
+  }
 }
 
 export default theme
