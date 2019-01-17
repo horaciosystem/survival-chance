@@ -3,7 +3,7 @@ import { Block, Table, Input } from "reakit"
 
 const Items = ["Water", "Food", "Medication", "Ammunition"]
 
-function ItemsInput({ onChange, value }) {
+function ItemsInput({ onChange, value, disabled }) {
   function persistValue(event) {
     let { name, value: fieldValue } = event.target
 
@@ -34,6 +34,7 @@ function ItemsInput({ onChange, value }) {
                   onChange={persistValue}
                   min="0"
                   defaultValue={0}
+                  disabled={disabled}
                 />
               </td>
             </tr>

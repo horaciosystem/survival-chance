@@ -36,7 +36,11 @@ function SurvivorEdit({ match: { params } }) {
       <Heading>New</Heading>
       <AsyncHandler fetcher={survivor}>
         {({ data }) => (
-          <SurvivorForm onSubmit={onSubmit} initialValues={{ ...data }} />
+          <SurvivorForm
+            onSubmit={onSubmit}
+            initialValues={{ ...data }}
+            isEditing={true}
+          />
         )}
       </AsyncHandler>
     </MainColumn>

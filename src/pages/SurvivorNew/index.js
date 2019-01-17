@@ -34,7 +34,7 @@ function SurvivorNew() {
   return (
     <MainColumn>
       <Heading>New</Heading>
-      <SurvivorForm onSubmit={onSubmit} />
+      <SurvivorForm onSubmit={onSubmit} isEditing={false} />
     </MainColumn>
   )
 }

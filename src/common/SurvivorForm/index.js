@@ -39,7 +39,7 @@ const FIELDS = [
   }
 ]
 
-function SurvivorForm({ onSubmit, initialValues = {} }) {
+function SurvivorForm({ onSubmit, initialValues = {}, isEditing }) {
   function handleSubmit(values) {
     let formData = normalizeValues(values)
     return onSubmit(formData)
@@ -56,7 +56,11 @@ function SurvivorForm({ onSubmit, initialValues = {} }) {
             <Field name="items" validate={required}>
               {({ input, meta }) => (
                 <div>
-                  <ItemsInput onChange={input.onChange} value={input.value} />
+                  <ItemsInput
+                    onChange={input.onChange}
+                    value={input.value}
+                    disabled={isEditing}
+                  />
                   {meta.error && meta.touched && (
                     <ErrorLabel>{meta.error}</ErrorLabel>
                   )}
