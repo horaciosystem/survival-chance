@@ -1,7 +1,7 @@
 import React from "react"
-import useLocation from "../../../lib/useLocation"
-import AsyncHandler from "../../../common/AsyncHandler"
-import Map from "../../../common/Map"
+import useLocation from "lib/useLocation"
+import AsyncHandler from "common/AsyncHandler"
+import Map from "common/Map"
 
 function LocationInput({ onChange }) {
   let location = useLocation()

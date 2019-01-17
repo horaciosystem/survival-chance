@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"
-import StoreContext from "../common/StoreContext"
+import StoreContext from "common/StoreContext"
 
 export default function useFetch(url) {
   let [loading, setLoading] = useState(false)

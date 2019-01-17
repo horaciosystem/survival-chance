@@ -39,7 +39,7 @@ const FIELDS = [
   }
 ]
 
-function SurvivorForm({ onSubmit }) {
+function SurvivorForm({ onSubmit, initialValues = {} }) {
   function handleSubmit(values) {
     let formData = normalizeValues(values)
     return onSubmit(formData)
@@ -48,6 +48,7 @@ function SurvivorForm({ onSubmit }) {
   return (
     <Form
       onSubmit={handleSubmit}
+      initialValues={initialValues}
       render={({ handleSubmit, pristine, invalid }) => (
         <form onSubmit={handleSubmit}>
           {FIELDS.map(renderField)}

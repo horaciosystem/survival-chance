@@ -1,9 +1,9 @@
 import React from "react"
 import { Grid, Toolbar, Heading } from "reakit"
 import { Link as ReactRouterLink } from "react-router-dom"
-import useFetch from "../../lib/useFetch"
-import AsyncHandler from "../../common/AsyncHandler"
-import MainColumn from "../../common/MainColumn"
+import useFetch from "lib/useFetch"
+import AsyncHandler from "common/AsyncHandler"
+import MainColumn from "common/MainColumn"
 import SurvivorCard from "./SurvivorCard"
 
 function SurvivorsList() {

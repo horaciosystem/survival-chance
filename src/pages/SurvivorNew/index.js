@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { Heading } from "reakit"
 import { Redirect } from "react-router"
 import { FORM_ERROR } from "final-form"
-import MainColumn from "../../common/MainColumn"
-import SurvivorForm from "./SurvivorForm"
+import MainColumn from "common/MainColumn"
+import SurvivorForm from "common/SurvivorForm"
 
 function SurvivorNew() {
   let [id, setId] = useState(null)
@@ -28,7 +28,7 @@ function SurvivorNew() {
   }
 
   if (id) {
-    return <Redirect to={`/survivors/${id}/details`} />
+    return <Redirect to={`/survivors/${id}/edit`} />
   }
 
   return (
