@@ -7,7 +7,7 @@ import MainColumn from "common/MainColumn"
 import SurvivorCard from "./SurvivorCard"
 
 function SurvivorsList() {
-  const movies = useFetch(
+  const survivors = useFetch(
     "//zssn-backend-example.herokuapp.com/api/people.json"
   )
 
@@ -29,7 +29,7 @@ function SurvivorsList() {
           </Toolbar.Focusable>
         </Toolbar.Content>
       </Toolbar>
-      <AsyncHandler fetcher={movies}>
+      <AsyncHandler fetcher={survivors}>
         {({ data }) => (
           <Grid
             columns="repeat( auto-fit, minmax(400px, 1fr) )"

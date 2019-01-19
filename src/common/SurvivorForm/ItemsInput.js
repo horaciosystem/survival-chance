@@ -1,47 +1,29 @@
 import React from "react"
-import { Block, Table, Input } from "reakit"
+import { Field } from "react-final-form"
+import { Box } from "reakit"
+import InventoryTable from "common/InventoryTable"
+import SurvivorInventory from "common/SurvivorInventory"
+import { required } from "utils/forms"
+import ErrorLabel from "./ErrorLabel"
 
-const Items = ["Water", "Food", "Medication", "Ammunition"]
-
-function ItemsInput({ onChange, value, disabled }) {
-  function persistValue(event) {
-    let { name, value: fieldValue } = event.target
-
-    onChange({
-      ...value,
-      [name]: fieldValue
-    })
-  }
-
-  return (
-    <Block>
-      <Table>
-        <caption>Inventory</caption>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Items.map(it => (
-            <tr key={it}>
-              <th>{it}</th>
-              <td>
-                <Input
-                  name={it}
-                  type="number"
-                  onChange={persistValue}
-                  min="0"
-                  defaultValue={0}
-                  disabled={disabled}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Block>
+function ItemsInput({ survivorId }) {
+  return survivorId ? (
+    <Box marginBottom={16}>
+      <SurvivorInventory survivorId={survivorId} />
+    </Box>
+  ) : (
+    <Field name="items" validate={required}>
+      {({ input, meta }) => (
+        <Box marginBottom={16}>
+          <InventoryTable
+            onChange={input.onChange}
+            value={input.value}
+            disabled={false}
+          />
+          {meta.error && meta.touched && <ErrorLabel>{meta.error}</ErrorLabel>}
+        </Box>
+      )}
+    </Field>
   )
 }
 

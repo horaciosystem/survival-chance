@@ -4,25 +4,19 @@ import { styled, Box, Label, Input, Button } from "reakit"
 import ItemsInput from "./ItemsInput"
 import ErrorLabel from "./ErrorLabel"
 import LocationInput from "./LocationInput"
+import {
+  composeValidators,
+  required,
+  mustBeNumber,
+  genderValidation,
+  minValue
+} from "utils/forms"
 
 const StyledInput = styled(Input)`
   border-color: #dbdbdb;
   color: #363636;
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 `
-
-const required = value => (value ? undefined : "Required")
-
-const mustBeNumber = value => (isNaN(value) ? "Must be a number" : undefined)
-
-const genderValidation = value =>
-  !["M", "F"].includes(value) ? "Must be F or M" : undefined
-
-const minValue = min => value =>
-  isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`
-
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined)
 
 const FIELDS = [
   { name: "name", label: "Name", validations: required },
@@ -39,7 +33,7 @@ const FIELDS = [
   }
 ]
 
-function SurvivorForm({ onSubmit, initialValues = {}, isEditing }) {
+function SurvivorForm({ onSubmit, initialValues = {}, survivorId = null }) {
   function handleSubmit(values) {
     let formData = normalizeValues(values)
     return onSubmit(formData)
@@ -52,24 +46,10 @@ function SurvivorForm({ onSubmit, initialValues = {}, isEditing }) {
       render={({ handleSubmit, pristine, invalid }) => (
         <form onSubmit={handleSubmit}>
           {FIELDS.map(renderField)}
-          <Box marginBottom={16}>
-            <Field name="items" validate={required}>
-              {({ input, meta }) => (
-                <div>
-                  <ItemsInput
-                    onChange={input.onChange}
-                    value={input.value}
-                    disabled={isEditing}
-                  />
-                  {meta.error && meta.touched && (
-                    <ErrorLabel>{meta.error}</ErrorLabel>
-                  )}
-                </div>
-              )}
-            </Field>
-          </Box>
+          <Label>Inventory</Label>
+          <ItemsInput survivorId={survivorId} />
           <Field name="lonlat">
-            {({ input, meta }) => (
+            {({ input }) => (
               <Box marginBottom={16}>
                 <Label>Last location: {input.value}</Label>
                 <LocationInput onChange={input.onChange} />

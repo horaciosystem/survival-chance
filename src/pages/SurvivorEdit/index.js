@@ -33,13 +33,14 @@ function SurvivorEdit({ match: { params } }) {
 
   return (
     <MainColumn>
-      <Heading>New</Heading>
+      <Heading>Edit</Heading>
+      <Heading as="h4">ID {params.id}</Heading>
       <AsyncHandler fetcher={survivor}>
         {({ data }) => (
           <SurvivorForm
             onSubmit={onSubmit}
             initialValues={{ ...data }}
-            isEditing={true}
+            survivorId={params.id}
           />
         )}
       </AsyncHandler>
