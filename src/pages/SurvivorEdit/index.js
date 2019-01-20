@@ -15,12 +15,12 @@ function SurvivorEdit({ match: { params } }) {
     return fetch(
       `//zssn-backend-example.herokuapp.com/api/people/${params.id}.json`,
       {
-        method: "PATH",
+        method: "PATCH",
         body
       }
     )
       .then(response => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           return undefined
         }
 
