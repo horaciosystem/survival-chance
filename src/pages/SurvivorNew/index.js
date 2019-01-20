@@ -4,6 +4,7 @@ import { Redirect } from "react-router"
 import { FORM_ERROR } from "final-form"
 import MainColumn from "common/MainColumn"
 import SurvivorForm from "common/SurvivorForm"
+import { success } from "lib/notifications"
 
 function SurvivorNew() {
   let [id, setId] = useState(null)
@@ -15,6 +16,7 @@ function SurvivorNew() {
     })
       .then(async response => {
         if (response.status === 201) {
+          success("Survivor created")
           let survivor = await response.json()
           setId(survivor.id)
           return undefined

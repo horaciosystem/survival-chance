@@ -1,10 +1,11 @@
 import React from "react"
 import { Heading } from "reakit"
 import { FORM_ERROR } from "final-form"
-import useFetch from "lib/useFetch"
 import AsyncHandler from "common/AsyncHandler"
 import MainColumn from "common/MainColumn"
 import SurvivorForm from "common/SurvivorForm"
+import useFetch from "lib/useFetch"
+import { success } from "lib/notifications"
 
 function SurvivorEdit({ match: { params } }) {
   const survivor = useFetch(
@@ -21,6 +22,7 @@ function SurvivorEdit({ match: { params } }) {
     )
       .then(response => {
         if (response.status === 200) {
+          success("Survivor updated")
           return undefined
         }
 
