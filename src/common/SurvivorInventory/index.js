@@ -26,11 +26,11 @@ function SurvivorInventory({ survivorId }) {
                 </tr>
               </thead>
               <tbody>
-                {data.map(({ item: { name, points } }) => (
+                {data.map(({ item: { name }, quantity }) => (
                   <tr key={name}>
                     <th>{name}</th>
                     <td>
-                      <Input defaultValue={points} disabled={true} />
+                      <Input defaultValue={quantity} disabled={true} />
                     </td>
                   </tr>
                 ))}
