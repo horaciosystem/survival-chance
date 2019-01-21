@@ -85,7 +85,11 @@ function SurvivorCard({
           <CardLabel>Status</CardLabel>
           <CardText>{infected ? "Infected" : "Not infected"}</CardText>
         </FieldRow>
-        <Link as={ReactRouterLink} to={`/survivors/${id}/edit`}>
+        <Link
+          as={ReactRouterLink}
+          to={`/survivors/${id}/edit`}
+          onClick={e => e.stopPropagation()}
+        >
           Edit
         </Link>
       </Flex>

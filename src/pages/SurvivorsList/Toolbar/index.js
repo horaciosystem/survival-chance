@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Flex, Link } from "reakit"
+import { Flex, Box, Link } from "reakit"
 import { Link as ReactRouterLink } from "react-router-dom"
 import SurvivorsSelectContext from "common/SurvivorsSelectProvider"
 import appTheme from "theme"
@@ -16,13 +16,11 @@ function Toolbar() {
       alignItems="center"
       marginBottom={appTheme.spacing.normal}
     >
-      <Link
-        as={ReactRouterLink}
-        to="/survivors/new"
-        marginRight={appTheme.spacing.normal}
-      >
-        New survivor
-      </Link>
+      <Box marginRight={appTheme.spacing.normal}>
+        <Link as={ReactRouterLink} to="/survivors/new">
+          New survivor
+        </Link>
+      </Box>
       <ReportInfectionModal disabled={items.length !== 2}>
         {hide => (
           <ModalContent

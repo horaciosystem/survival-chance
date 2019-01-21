@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useMemo } from "react"
 import { Box, Flex, Grid, Heading } from "reakit"
 import MainColumn from "common/MainColumn"
 import SearchInput from "common/SearchInput"
@@ -55,8 +55,11 @@ function SurvivorsList() {
           </Box>
         </Flex>
         <Toolbar />
-        <Box marginBottom={appTheme.spacing.normal}>
-          *Select two survivors: [reporter and infected] to report an infection.
+        <Box
+          marginBottom={appTheme.spacing.normal}
+          color={appTheme.palette.textColor50}
+        >
+          *Select two survivors [reporter and infected] to report an infection.
         </Box>
         <Grid
           columns="repeat( auto-fit, minmax(300px, 1fr) )"
@@ -85,7 +88,10 @@ function ListContent({ survivors: { error, loading, data }, searchTerm }) {
     return null
   }
 
-  let results = filterByIdOrName(searchTerm, data)
+  let results = useMemo(() => filterByIdOrName(searchTerm, data), [
+    searchTerm,
+    data
+  ])
 
   return results.length ? (
     results.map(survivor => {
