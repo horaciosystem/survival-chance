@@ -55,7 +55,7 @@ function SurvivorsList() {
         </Flex>
       </Flex>
       <Grid
-        columns="repeat( auto-fit, minmax(400px, 1fr) )"
+        columns="repeat( auto-fit, minmax(300px, 1fr) )"
         autoRows="auto"
         gap="10px"
       >
