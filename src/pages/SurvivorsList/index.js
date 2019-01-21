@@ -8,6 +8,13 @@ import { extractId } from "utils/normalizer"
 import SurvivorCard from "./SurvivorCard"
 import appTheme from "theme"
 
+const STORE_KEY = "SURVIVORS"
+const URL = "//zssn-backend-example.herokuapp.com/api/people.json"
+
+const stateUpdater = data => prevState => {
+  return { ...prevState, [STORE_KEY]: data }
+}
+
 const filterById = (term, data) => {
   if (!term) return data
 
@@ -23,9 +30,7 @@ const filterById = (term, data) => {
 function SurvivorsList() {
   let [searchTerm, setSearchTerm] = useState("")
 
-  const survivors = useFetch(
-    "//zssn-backend-example.herokuapp.com/api/people.json"
-  )
+  const survivors = useFetch({ url: URL, key: STORE_KEY, stateUpdater })
 
   return (
     <MainColumn>

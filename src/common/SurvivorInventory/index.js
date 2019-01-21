@@ -4,10 +4,18 @@ import InventoryTable from "common/InventoryTable"
 import AsyncHandler from "common/AsyncHandler"
 import useFetch from "lib/useFetch"
 
+const STORE_KEY = "INVENTORY"
+
+const stateUpdater = data => prevState => {
+  return { ...prevState, [STORE_KEY]: data }
+}
+
 function SurvivorInventory({ survivorId }) {
-  const inventory = useFetch(
-    `//zssn-backend-example.herokuapp.com/api/people/${survivorId}/properties.json`
-  )
+  const inventory = useFetch({
+    key: STORE_KEY,
+    url: `//zssn-backend-example.herokuapp.com/api/people/${survivorId}/properties.json`,
+    stateUpdater
+  })
 
   return (
     <AsyncHandler fetcher={inventory}>

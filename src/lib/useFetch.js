@@ -1,35 +1,28 @@
 import { useState, useEffect, useContext } from "react"
 import StoreContext from "common/StoreContext"
 
-export default function useFetch(url) {
-  let [loading, setLoading] = useState(false)
-  let [data, setData] = useState(null)
-  let [error, setError] = useState(null)
-
+export default function useFetch({ url, key, stateUpdater }) {
   const store = useContext(StoreContext)
+
+  let [loading, setLoading] = useState(true)
+  let [data, setData] = useState(store.state[key])
+  let [error, setError] = useState(null)
 
   useEffect(
     () => {
-      setData(null)
+      setLoading(true)
       setError(null)
-      setLoading(false)
-
-      let cachedData = store.state[url]
-      if (cachedData) {
-        setData(cachedData)
-        store.load(url)
-      } else {
-        setLoading(true)
-        store
-          .load(url)
-          .then(data => {
-            setData(data)
-            setLoading(false)
-          })
-          .catch(setError)
-      }
+      store.load({ url, stateUpdater }).catch(setError)
     },
-    [url]
+    [url, key]
+  )
+
+  useEffect(
+    () => {
+      setData(store.state[key] || null)
+      setLoading(false)
+    },
+    [store.state[key]]
   )
 
   return { loading, data, error }

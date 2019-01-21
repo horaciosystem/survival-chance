@@ -7,10 +7,18 @@ import SurvivorForm from "common/SurvivorForm"
 import useFetch from "lib/useFetch"
 import { success } from "lib/notifications"
 
+const STORE_KEY = "SURVIVOR"
+
+const stateUpdater = data => prevState => {
+  return { ...prevState, [STORE_KEY]: data }
+}
+
 function SurvivorEdit({ match: { params } }) {
-  const survivor = useFetch(
-    `//zssn-backend-example.herokuapp.com/api/people/${params.id}.json`
-  )
+  const survivor = useFetch({
+    key: STORE_KEY,
+    url: `//zssn-backend-example.herokuapp.com/api/people/${params.id}.json`,
+    stateUpdater
+  })
 
   function onSubmit(body) {
     return fetch(

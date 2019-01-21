@@ -5,12 +5,11 @@ const StoreContext = createContext()
 function StoreProvider({ children }) {
   let [state, setState] = useState({})
 
-  const load = url => {
+  const load = ({ url, stateUpdater }) => {
     return fetch(url)
       .then(data => data.json())
       .then(data => {
-        setState({ ...state, [url]: data })
-        return data
+        setState(stateUpdater(data))
       })
   }
 
