@@ -93,7 +93,7 @@ function ListContent({ survivors: { error, loading, data }, searchTerm }) {
       width="100%"
       height={800}
       itemCount={results.length}
-      itemSize={180}
+      itemSize={100}
       renderItem={({ index, style }) => {
         let survivor = results[index]
         let id = extractId(survivor.location)

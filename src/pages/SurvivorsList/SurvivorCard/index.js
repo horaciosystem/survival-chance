@@ -75,24 +75,28 @@ function SurvivorCard({
           <Name>{name}</Name>
         </FieldRow>
         <FieldRow>
-          <CardLabel>Age</CardLabel>
-          <CardText>{age}</CardText>
+          <Flex flexGrow={1}>
+            <CardLabel>Age</CardLabel>
+            <CardText>{age}</CardText>
+          </Flex>
+          <Flex flexGrow={1}>
+            <CardLabel>Gender</CardLabel>
+            <CardText>{gender}</CardText>
+          </Flex>
+          <Flex flexGrow={1}>
+            <CardLabel>Status</CardLabel>
+            <CardText>{infected ? "Infected" : "Not infected"}</CardText>
+          </Flex>
+          <Box flexGrow={1}>
+            <Link
+              as={ReactRouterLink}
+              to={`/survivors/${id}/edit`}
+              onClick={e => e.stopPropagation()}
+            >
+              Edit
+            </Link>
+          </Box>
         </FieldRow>
-        <FieldRow>
-          <CardLabel>Gender</CardLabel>
-          <CardText>{gender}</CardText>
-        </FieldRow>
-        <FieldRow>
-          <CardLabel>Status</CardLabel>
-          <CardText>{infected ? "Infected" : "Not infected"}</CardText>
-        </FieldRow>
-        <Link
-          as={ReactRouterLink}
-          to={`/survivors/${id}/edit`}
-          onClick={e => e.stopPropagation()}
-        >
-          Edit
-        </Link>
       </Flex>
     </StyledCard>
   )
