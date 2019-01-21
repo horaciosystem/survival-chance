@@ -1,8 +1,7 @@
 import React from "react"
 import { styled, css, Box, Flex, Card, Link } from "reakit"
 import { Link as ReactRouterLink } from "react-router-dom"
-import { theme, palette, ifProp } from "styled-tools"
-import { extractId } from "utils/normalizer"
+import { theme, palette, ifProp, ifNotProp } from "styled-tools"
 
 const CardLabel = styled(Box)`
   color: ${palette("text75")};
@@ -22,19 +21,38 @@ const Name = styled(Box)`
   -webkit-box-orient: vertical;
   overflow: hidden;
 `
-const cardBorderStyle =
+const defaultBorderStyle =
   "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
 
 const dangerStyle = css`
-  box-shadow: ${cardBorderStyle}, inset 10px 0 0 ${palette("error")};
+  box-shadow: ${defaultBorderStyle}, inset 10px 0 0 ${palette("error")};
+  padding-left: 0.3rem;
+`
+
+const activeStyle = css`
+  box-shadow: ${defaultBorderStyle}, 0 10px 6px -6px #777,
+    inset 0 0 0 10px rgba(31, 58, 147, 1);
+`
+
+const normalStyle = css`
+  ${ifProp("active", activeStyle)};
+  cursor: pointer;
+
+  :hover {
+    box-shadow: ${ifNotProp(
+      "active",
+      `${defaultBorderStyle}, 0 10px 6px -6px #777`
+    )};
+    background-color: ${palette("lightGray")};
+  }
 `
 
 const StyledCard = styled(Card)`
-  box-shadow: ${cardBorderStyle};
   border-radius: 3px;
-  padding: 8px;
+  box-shadow: ${defaultBorderStyle};
   color: ${palette("text")};
-  ${ifProp("danger", dangerStyle)};
+  padding: ${theme("spacing.small")};
+  ${ifProp("danger", dangerStyle, normalStyle)};
 `
 
 const FieldRow = styled(Flex)`
@@ -42,13 +60,15 @@ const FieldRow = styled(Flex)`
 `
 
 function SurvivorCard({
-  survivor: { name, age, location, gender, ...fields }
+  survivor: { id, name, age, location, gender, ...fields },
+  selected,
+  toggleInfection
 }) {
-  let id = extractId(location)
   let infected = fields["infected?"]
+  let onClick = infected ? () => {} : () => toggleInfection({ id, name })
 
   return (
-    <StyledCard danger={infected}>
+    <StyledCard danger={infected} active={selected} onClick={onClick}>
       <Flex flexDirection="column">
         <FieldRow>
           <Name>{name}</Name>
