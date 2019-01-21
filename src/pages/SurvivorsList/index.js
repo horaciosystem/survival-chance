@@ -18,14 +18,14 @@ const stateUpdater = data => prevState => {
   return { ...prevState, [STORE_KEY]: data }
 }
 
-const filterById = (term, data) => {
+const filterByIdOrName = (term, data) => {
   if (!term) return data
 
   return (
     data &&
     data.filter(it => {
       let id = extractId(it.location)
-      return term === id
+      return term === id || it.name.toLowerCase().includes(term.toLowerCase())
     })
   )
 }
@@ -48,7 +48,10 @@ function SurvivorsList() {
             Survivors
           </Heading>
           <Box marginRight={appTheme.spacing.normal}>
-            <SearchInput onSearchChange={term => setSearchTerm(term)} />
+            <SearchInput
+              onSearchChange={term => setSearchTerm(term)}
+              placeholder="Search by name or ID"
+            />
           </Box>
         </Flex>
         <Toolbar />
@@ -82,7 +85,7 @@ function ListContent({ survivors: { error, loading, data }, searchTerm }) {
     return null
   }
 
-  let results = filterById(searchTerm, data)
+  let results = filterByIdOrName(searchTerm, data)
 
   return results.length ? (
     results.map(survivor => {

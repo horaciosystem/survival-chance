@@ -10,7 +10,7 @@ const StyledInput = styled(Input)`
   font-weight: ${theme("fontWeight.regular")};
 `
 
-function SearchInput({ defaultValue = "", onSearchChange }) {
+function SearchInput({ defaultValue = "", onSearchChange, placeholder }) {
   let onSubmit = event => {
     event.preventDefault()
     onSearchChange(event.target.search.value)
@@ -23,7 +23,7 @@ function SearchInput({ defaultValue = "", onSearchChange }) {
           type="search"
           name="search"
           defaultValue={defaultValue}
-          placeholder="Search by id"
+          placeholder={placeholder}
         />
         <Button absolute right={0} fontSize={18} type="submit">
           Search
