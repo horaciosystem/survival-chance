@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "and": "^0.0.3",
+    "compression": "^1.7.3",
+    "express": "^4.16.4",
     "final-form": "^4.11.0",
     "leaflet": "^1.4.0",
     "react": "16.8.0-alpha.0",
@@ -19,7 +21,8 @@
     "styled-tools": "^1.6.0"
   },
   "scripts": {
-    "start": "HTTPS=true&&react-scripts start",
+    "start": "node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
