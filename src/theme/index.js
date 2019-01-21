@@ -10,7 +10,8 @@ const theme = {
     text75: "#616161",
     text50: "#959595",
     text25: "#CACACA",
-    error: "#d32f2f"
+    error: "#d32f2f",
+    lightGray: "#e6e5e5"
   },
   pageWidth: "1200px",
   spacing: {
