@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import { Provider as ThemeProvider } from "reakit"
 import { ToastContainer } from "react-toastify"
 import { StoreProvider } from "common/StoreContext"
@@ -18,6 +18,11 @@ class App extends Component {
           <>
             <Router>
               <>
+                <Route
+                  exact
+                  path="/"
+                  render={() => <Redirect to="/survivors" />}
+                />
                 <Route path="/survivors" exact component={SurvivorsList} />
                 <Route path="/survivors/new" component={SurvivorNew} />
                 <Route path="/survivors/:id/edit" component={SurvivorEdit} />
