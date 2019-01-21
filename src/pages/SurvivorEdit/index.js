@@ -36,7 +36,7 @@ function SurvivorEdit({ match: { params } }) {
   return (
     <MainColumn>
       <Heading>Edit</Heading>
-      <Heading as="h4">ID {params.id}</Heading>
+      <Heading fontSize={24}>ID {params.id}</Heading>
       <AsyncHandler fetcher={survivor}>
         {({ data }) => (
           <SurvivorForm

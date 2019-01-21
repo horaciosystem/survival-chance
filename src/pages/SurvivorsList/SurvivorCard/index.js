@@ -2,6 +2,7 @@ import React from "react"
 import { styled, Box, Heading, Flex, Card } from "reakit"
 import { Link as ReactRouterLink } from "react-router-dom"
 import { palette } from "styled-tools"
+import { extractId } from "utils/normalizer"
 
 const CardLabel = styled(Box)`
   color: ${palette("text75")};
@@ -33,11 +34,6 @@ function SurvivorCard({ survivor: { name, age, location, gender } }) {
       <ReactRouterLink to={`/survivors/${id}/edit`}>Edit</ReactRouterLink>
     </StyledCard>
   )
-}
-
-function extractId(url) {
-  let array = url.split("/")
-  return array.pop()
 }
 
 export default SurvivorCard
