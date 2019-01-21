@@ -1,5 +1,6 @@
 import React, { useState, useContext, useMemo } from "react"
-import { Box, Flex, Grid, Heading } from "reakit"
+import { Box, Flex, Heading } from "reakit"
+import VirtualList from "react-tiny-virtual-list"
 import MainColumn from "common/MainColumn"
 import SearchInput from "common/SearchInput"
 import SurvivorsSelectContext, {
@@ -61,13 +62,7 @@ function SurvivorsList() {
         >
           *Select two survivors [reporter and infected] to report an infection.
         </Box>
-        <Grid
-          columns="repeat( auto-fit, minmax(300px, 1fr) )"
-          autoRows="auto"
-          gap="10px"
-        >
-          <ListContent survivors={survivors} searchTerm={searchTerm} />
-        </Grid>
+        <ListContent survivors={survivors} searchTerm={searchTerm} />
       </MainColumn>
     </SurvivorsSelectProvider>
   )
@@ -93,22 +88,28 @@ function ListContent({ survivors: { error, loading, data }, searchTerm }) {
     data
   ])
 
-  return results.length ? (
-    results.map(survivor => {
-      let id = extractId(survivor.location)
-      let selected = infectionContext.items.some(it => it.id === id)
+  return (
+    <VirtualList
+      width="100%"
+      height={800}
+      itemCount={results.length}
+      itemSize={180}
+      renderItem={({ index, style }) => {
+        let survivor = results[index]
+        let id = extractId(survivor.location)
+        let selected = infectionContext.items.some(it => it.id === id)
 
-      return (
-        <SurvivorCard
-          key={id}
-          survivor={{ ...survivor, id }}
-          selected={selected}
-          toggleInfection={infectionContext.toggleItem}
-        />
-      )
-    })
-  ) : (
-    <span>No results found.</span>
+        return (
+          <div key={id} style={style}>
+            <SurvivorCard
+              survivor={{ ...survivor, id }}
+              selected={selected}
+              toggleInfection={infectionContext.toggleItem}
+            />
+          </div>
+        )
+      }}
+    />
   )
 }
 

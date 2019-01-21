@@ -48,6 +48,7 @@ const normalStyle = css`
 `
 
 const StyledCard = styled(Card)`
+  width: calc(100% - 5px);
   border-radius: 3px;
   box-shadow: ${defaultBorderStyle};
   color: ${palette("text")};
