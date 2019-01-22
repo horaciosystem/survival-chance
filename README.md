@@ -1,6 +1,6 @@
 # ZSSN (Zombie Survival Social Network) with react hooks
 
-[Try it out](https://github-portal-shawn.herokuapp.com)
+[Try it out](https://horacio-zssn.herokuapp.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
